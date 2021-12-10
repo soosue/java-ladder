@@ -16,7 +16,7 @@ public class LadderPartFactoryTest {
     @ParameterizedTest
     @MethodSource(value = "provideIndex")
     void create(int idx, Class<?> clazz) {
-        assertThat(LadderPartFactory.ladderPart(idx)).isInstanceOf(clazz);
+        assertThat(LadderPartFactory.ladderPart(idx, () -> true)).isInstanceOf(clazz);
     }
 
     private static Stream<Arguments> provideIndex() {
@@ -30,7 +30,7 @@ public class LadderPartFactoryTest {
     @Test
     void return_emptyRung() {
         LadderPartFactory.changeIsPreviousRungSet(true);
-        LadderPart emptyRung = LadderPartFactory.ladderPart(3);
+        LadderPart emptyRung = LadderPartFactory.ladderPart(3, () -> true);
 
         assertThat(emptyRung).isEqualTo(Rung.from(false));
     }
@@ -38,7 +38,7 @@ public class LadderPartFactoryTest {
     @DisplayName("이전 Rung이 set되어 있지 않은 Rung이면 아무 Rung 반환")
     @Test
     void return_any_rung() {
-        LadderPart anyRung = LadderPartFactory.ladderPart(3);
+        LadderPart anyRung = LadderPartFactory.ladderPart(3, () -> true);
 
         assertThat(anyRung).isInstanceOf(Rung.class);
     }

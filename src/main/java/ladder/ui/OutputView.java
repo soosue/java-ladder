@@ -2,7 +2,7 @@ package ladder.ui;
 
 import ladder.domain.*;
 import ladder.dto.LadderGame;
-import ladder.util.function.Function;
+import ladder.util.function.MathFunction;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,18 +39,18 @@ public class OutputView {
         STRING_BUILDER.setLength(STRING_BUILDER_DEFAULT_LENGTH);
         STRING_BUILDER.append(name);
         while (STRING_BUILDER.length() < NAME_PADDING) {
-            append(STRING_BUILDER);
+            append();
         }
         return STRING_BUILDER.toString();
     }
 
-    private static void append(StringBuilder sb) {
-        if (Function.EVEN_NUMBER.test(sb.length())) {
-            sb.append(SPACE);
+    private static void append() {
+        if (MathFunction.EVEN_NUMBER.test(STRING_BUILDER.length())) {
+            STRING_BUILDER.append(SPACE);
             return;
         }
 
-        sb.insert(STRING_BUILDER_DEFAULT_LENGTH, SPACE);
+        STRING_BUILDER.insert(STRING_BUILDER_DEFAULT_LENGTH, SPACE);
     }
 
     private static void printLadders(Ladder ladder) {
